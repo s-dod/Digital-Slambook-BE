@@ -38,7 +38,7 @@ public class SlamBook {
     @Column(length = 255)
     private String favoriteColor;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> hobbies;
 
     @Column(columnDefinition = "TEXT")
