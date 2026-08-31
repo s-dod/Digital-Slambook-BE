@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/slam")
 public class SlamBookController {
@@ -30,6 +32,15 @@ public class SlamBookController {
     public ResponseEntity<ApiResponse<SlamBookResponse>> getSlamBook(@PathVariable Long id) {
         SlamBookResponse response = slamBookService.getSlamBook(id);
         return ResponseEntity.ok(ApiResponse.success("SLAM Book retrieved successfully.", response));
+    }
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<SlamBookResponse>>> getAllSlamBooks() {
+
+        List<SlamBookResponse> slamBooks = slamBookService.getAllSlamBooks();
+
+        return ResponseEntity.ok(
+                ApiResponse.success("Get all slambook",slamBooks));
+
     }
 
     @PutMapping("/{id}")

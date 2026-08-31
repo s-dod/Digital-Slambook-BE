@@ -10,6 +10,8 @@ import com.slambookBE.service.SlamBookService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class SlamBookServiceImpl implements SlamBookService {
@@ -42,6 +44,14 @@ public class SlamBookServiceImpl implements SlamBookService {
         mapUpdateRequestToEntity(request, slamBook);
         SlamBook updated = slamBookRepository.save(slamBook);
         return mapToResponse(updated);
+    }
+
+    @Override
+    public List<SlamBookResponse> getAllSlamBooks() {
+        return slamBookRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     @Override
